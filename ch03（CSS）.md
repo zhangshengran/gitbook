@@ -178,13 +178,13 @@ display控制元素是否渲染DOM，visibility控制元素是否显示渲染DOM
 
 **CSS选择符有哪些？**
 
--标签选择器
--相邻选择器
--子选择器
--后代选择器
--通配符选择器
--属性选择器（a[rel = "external"]）
--伪类选择器（a:hover, li:nth-child）
+- 标签选择器
+- 相邻选择器
+- 子选择器
+- 后代选择器
+- 通配符选择器
+- 属性选择器（a[rel = "external"]）
+- 伪类选择器（a:hover, li:nth-child）
 
 **display有哪些值？说明他们的作用**
 
@@ -207,15 +207,15 @@ visibility: hidden; opacity: 0 ；display: none; transform: scale(0);
 
 **CSS3有哪些新特性？**
 
--平滑过渡 transition: all .3s ease-in .1s;
--弹性盒模型 display: flex;
--媒体查询 @media (max-width: 480px) {.box: {column-count: 1;}}
--文字类
--边框类
+- 平滑过渡 transition: all .3s ease-in .1s;
+- 弹性盒模型 display: flex;
+- 媒体查询 @media (max-width: 480px) {.box: {column-count: 1;}}
+- 文字类
+- 边框类
 
 **一个高度自适应的div，里面有两个div，一个高度100px，希望另一个填满剩下的高度**
 
--方案1： .sub { height: calc(100%-100px); }
--方案2： .container { position:relative; } .sub { position: absolute; top: 100px; bottom: 0; }
--方案3： .container { display:flex; flex-direction:column; } .sub { flex:1; }
+- 方案1： .sub { height: calc(100%-100px); }
+- 方案2： .container { position:relative; } .sub { position: absolute; top: 100px; bottom: 0; }
+- 方案3： .container { display:flex; flex-direction:column; } .sub { flex:1; }
 
