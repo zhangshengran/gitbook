@@ -123,3 +123,48 @@ js具有自动回收垃圾的机制，即执行环境会负责管理程序执行
 4.DOM泄漏
 
 JS和DOM互相引用，造成泄漏
+
+**Javascript如何实现继承？**
+
+构造函数绑定：使用 call 或 apply 方法，将父对象的构造函数绑定在子对象上
+
+```javascript
+function Cat(name,color){
+ 　Animal.apply(this, arguments);
+ 　this.name = name;
+ 　this.color = color;
+}
+```
+
+实例继承：将子对象的 prototype 指向父对象的一个实例
+```javascript
+Cat.prototype = new Animal();
+Cat.prototype.constructor = Cat;
+```
+
+```javascript
+ function extend(Child, Parent) {
+  　　　var p = Parent.prototype;
+  　　　var c = Child.prototype;
+  　　　for (var i in p) {
+  　　　   c[i] = p[i];
+  　　　}
+  　　　c.uber = p;
+  　 }
+```
+原型继承：将子对象的 prototype 指向父对象的 prototype
+```javascript
+ function extend(Child, Parent) {
+        var F = function(){};
+      　F.prototype = Parent.prototype;
+      　Child.prototype = new F();
+      　Child.prototype.constructor = Child;
+      　Child.uber = Parent.prototype;
+    }
+```
+ES6 语法糖
+```javascript
+```
+
+```javascript
+```
