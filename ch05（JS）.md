@@ -164,8 +164,44 @@ Cat.prototype.constructor = Cat;
 ```
 ES6 语法糖
 ```javascript
+class son extend father{
+  constractor(){
+    super();
+  }
+  ...
+}
 ```
 
-```javascript
+
+
+
+**控制台的妙用**
+
+```js
+console.dir  查看所有属性
+console.table  列表形式列出信息（测试接口非常好用）
+getEventListeners(DOM),返回所选DOM上绑定的所有事件
 ```
 
+**偏函数**
+
+```js
+function add(a,b){
+  return a+b;
+}
+
+function partion(fn,a){
+  return function(b){
+      return fn(a,b);
+  }
+}
+
+-----------------------------
+
+function add(a,b){
+    return a + b;
+}
+var obj = {};
+obj.parAdd = add.bind(obj,1);
+console.log(obj.parAdd(2));//结果3
+```
