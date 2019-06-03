@@ -42,6 +42,6 @@ git add填加到暂存区,git commit 添加到版本库
 
 
 
-WINDOWS ADD
+WINDOWS AD
 testVIM
 shell test
