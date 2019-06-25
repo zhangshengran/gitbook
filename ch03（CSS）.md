@@ -219,3 +219,5 @@ visibility: hidden; opacity: 0 ；display: none; transform: scale(0);
 - 方案2： .container { position:relative; } .sub { position: absolute; top: 100px; bottom: 0; }
 - 方案3： .container { display:flex; flex-direction:column; } .sub { flex:1; }
 
+
+

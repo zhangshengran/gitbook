@@ -205,3 +205,27 @@ var obj = {};
 obj.parAdd = add.bind(obj,1);
 console.log(obj.parAdd(2));//结果3
 ```
+**防抖**
+```js
+function debounce(fn, wait) {
+    var timer = null;
+    return function (...arg) {
+        if (!timer) {
+            timer = setTimeout(() => {
+                fn(...arg);
+
+            }, wait)
+
+
+        } else {
+            clearTimeout(timer);
+            timer = setTimeout(() => {
+                fn(...arg);
+
+            }, wait)
+        }
+
+    }
+
+}
+```
