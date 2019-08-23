@@ -229,3 +229,25 @@ function debounce(fn, wait) {
 
 }
 ```
+
+**实现bind**
+```js
+Function.prototype.mybind = function(...args) {
+    var self = this;//取当前函数
+    var content = args.splice(0,1)//取需要绑定的上下文,args剩下的是绑定时传入的参数
+    return function(...args2){//args2是绑定返回的新函数出入的参数
+        return self.apply(content,args.concat(args2))
+    }
+}
+
+
+var a = { a: 1, c: 2 }
+
+function b(...arg) {
+    console.log(this);
+    console.log(arg);
+    // console.log(b);
+}
+var c = b.mybind(a, 111);
+c(222);
+```
