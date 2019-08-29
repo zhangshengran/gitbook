@@ -251,3 +251,67 @@ function b(...arg) {
 var c = b.mybind(a, 111);
 c(222);
 ```
+
+**手写简单的promise**
+```js
+
+
+个人理解promise其实是一个状态机，就是根据操作去改变状态，然后再根据状态进行相应的操作。
+
+const PENDING = 'pending'
+const FULFILLED = 'fulfilled'
+const REJECTED = 'rejected'
+const RESOLVED = 'resolved'
+class myPromise {
+    constructor(fn) {//首先要清楚，promise里面,then，all,recace是存在于原型链的，而其他都是自己私有的方法，所以放在constructor里
+        this.state = PENDING;
+        this.data = null;//初始化当前实例的数据
+        this.resolveArr = [];
+        this.resolve = (data) => {
+            //当我们调用reslove的时候，其实说明我们当前的操作完成了，
+            this.state = RESOLVED;//所以我们首先应该改变状态
+            this.data = data;//传递拿到的数据
+
+            this.resolveArr.forEach(fn => { fn(this.data) })
+            //上面这行代码我觉得很精华，场景一，我们在一开始创建Promise时运行的是同步任务，那我们
+            //执行resolve，然后执行then，传递下去。
+            // 但是如果我们一开始创建的任务里面是异步的，比如说是进行ajax调用，那我们在调用ajax的时候，浏览器会进行
+            // 网络IO，但是继续往下运行代码，因为非阻塞啊，所以then执行，但这个时候，我们data为传递，所以，then执行的
+            // 是把用户的处理函数放入队列，等resolve的时候去扫这个队列，如果有任务然后才去执行。
+
+        }
+        this.reject = (data) => {
+            //reject同resolve
+            this.state = REJECTED;
+            this.data = data;
+        }
+        try {//上来直接执行函数，如果出现错误，则catch直接捕捉到执行reject
+            fn(this.resolve, this.reject)
+        } catch (e) {
+            this.reject(e);
+        }
+    }
+
+    then(resFn, rejFn) {
+        //then调用的时候首先先去判断状态，因为then是根据状态然后去调用相应的处理函数
+        if (this.state === PENDING) {//代表第一次用户的操作在V8执行到then的时候还没有完成（比如说一开始用户传入了宏任务函数setTimeOut之类）
+            //那我们能做的是把用户传入的函数放入一个队列中，等状态改变了然后再执行。
+            this.resolveArr.push(resFn);
+        } else if (this.state === RESOLVED) {//代表第一次的操作已经完成，而且用户已经调用了resolve,所以我们要执行我们then的处理逻辑
+            resFn(this.data)//调用用户传入的成功函数，我们把状态机的数据注入进去
+        } else {
+            //代表用户调用了reject函数，然后状态机已经为rej状态
+            rejFn(this.data)//直接调用用户传入的reject函数，我们注入数据
+        }
+    }
+
+}
+
+var a = new myPromise((res) => {
+    setTimeout(() => { res(1) }, 1000)//注意,setTimeout里面的代码是在then执行之后运行的！
+})
+a.then((data) => { console.log(data) })
+
+
+
+```
