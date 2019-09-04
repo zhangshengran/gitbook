@@ -1,4 +1,4 @@
-- [工具推荐](README.md)
+- [git](README.md)
 - [数据结构](ch01（数据结构与算法）.md)
 - [网络原理](ch02（网络）.md)
 - [CSS](ch03（CSS）.md)
