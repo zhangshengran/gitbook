@@ -1,7 +1,7 @@
 
 ##虚拟dom转换
+```js
 
-```html
 <body>
     <div id="virtual-dom" b='123'>
         <p>Virtual DOM</p>
@@ -52,13 +52,9 @@
     // 将虚拟dom转为dom
     function render(dom) {
         let el = document.createElement(dom.el);//拿到元素类型
-        el.innerText = dom.value;
-        // debugger
-        dom.value?el.innerText = dom.value:el.innerText = null;
-        if( dom.value){
-            console.log(123)
-        }
-        let attrs = dom.attrs;//元素属性
+        let TextNode =  document.createTextNode(dom.value)
+        dom.value?el.appendChild(TextNode):el.innerText = null;
+           let attrs = dom.attrs;//元素属性
         // debugger
         let attrsKeyArr = Object.keys(attrs);
         attrsKeyArr.forEach((attrKey) => {
