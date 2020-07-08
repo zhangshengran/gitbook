@@ -7,4 +7,5 @@
 - [JS](ch05（JS）.md)
 - [webpack](ch07（webpack）.md)
 - [问答合集](ch06（其他）.md)
+- [JS随写](ch09（JS随写）.md)
 
